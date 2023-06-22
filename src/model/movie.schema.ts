@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-export const movieschema = new mongoose.Schema({
+export const Movieschema = new mongoose.Schema({
   title: { type: String, required: true },
   actors: [{ type: String }],
   crewmembers: [
