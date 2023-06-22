@@ -1,5 +1,5 @@
 import { Document } from 'mongoose';
-export interface Shows extends Document {
+export interface User extends Document {
     name: string;
     password: number;
     post: string;
