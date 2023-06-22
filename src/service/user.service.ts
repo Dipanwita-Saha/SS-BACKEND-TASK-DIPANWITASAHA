@@ -52,7 +52,7 @@ export class UserService{
         return this.userModel.findById(id).exec();
         }
 
-    async Login(user:User):Promise<User| undefined>{
+    async LogIn(user:User):Promise<User| undefined>{
         const name=user.name;
         const finduser=await this.userModel.findOne({name:name}).exec();
         if(finduser)
