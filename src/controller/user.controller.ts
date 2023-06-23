@@ -1,7 +1,8 @@
-import {Body, Post, Get, Param} from '@nestjs/common/decorators/http';
-import { Controller } from '@nestjs/common';
+import {Body, Post, Get, Param,Request} from '@nestjs/common/decorators/http';
+import { Controller, UseGuards } from '@nestjs/common';
 import { User } from '../model/user.model';
 import { UserService } from 'src/service/user.service';
+import { AdminGuard } from 'src/guard/auth.guard';
 
 @Controller('user')
 
@@ -20,7 +21,8 @@ export class UserController{
             }
         }
 
-        @Post('/createadmin')
+        @Post('/insertadmin')
+        @UseGuards(AdminGuard)
         async CreateAdmin(@Body() user:User): Promise<User|any>{
             const getuser= this.userService.CreateAdmin(user);
             if(getuser!=undefined)
@@ -34,15 +36,18 @@ export class UserController{
         }
 
         @Get('/alluser')
+        @UseGuards(AdminGuard)
         FindAllUser():Promise<User[]>{
         return this.userService.FindAllUser();
         }
 
         @Post('/login')
-        async LogIn(@Body() user:User): Promise<User|any>{
+        async LogIn(@Body() user:User,@Request() req): Promise<User|any>{
             const getuser= this.userService.LogIn(user);
             if(getuser!=undefined)
             {
+                req.res.cookie('name', (await getuser).name);
+                req.res.cookie('post', (await getuser).post);
                 return getuser;
             }
             else
