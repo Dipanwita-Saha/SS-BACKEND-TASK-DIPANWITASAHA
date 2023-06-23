@@ -6,11 +6,8 @@ export class AdminGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    
-    const req = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest();
 
-  return req.cookies['post']=="ADMIN";
+  return request.cookies['post']==="ADMIN";
   }
 }
-
-

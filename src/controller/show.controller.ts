@@ -10,7 +10,7 @@ export class ShowController{
     constructor(private showService: ShowService){}
 
         @UseGuards(AdminGuard)
-        @Post('/createshow')
+        @Post('/insertshow')
         async CreateShow(@Body() show:Show): Promise<Show>{
             return this.showService.CreateShow(show);
         }

@@ -11,19 +11,25 @@ export class UserService{
 
     async CreateUser(user:User): Promise<User| undefined>{
         const name=user.name;
+        const post=user.post;
         const finduser=await this.userModel.findOne({name:name}).exec();
         if(finduser)
         {
             return undefined;
         }
-        else{
-            user.post="USER";
+        else 
+        {
             const salt = await bcrypt.genSalt();
             const hashpass =await bcrypt.hash(user.password,salt);
             user.password=hashpass;
+            if(post!="ADMIN")
+            {
+            user.post="USER";
+            }
             const newuser = new this.userModel(user);
             return newuser.save();
         }
+      
     }
 
     async CreateAdmin(user:User): Promise<User| undefined>{

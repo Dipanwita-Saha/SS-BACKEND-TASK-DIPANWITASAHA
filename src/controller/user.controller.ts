@@ -10,7 +10,7 @@ export class UserController{
     constructor(private userService: UserService){}
         @Post('/signup')
         async SignUp(@Body() user:User): Promise<User|any>{
-            const getuser= this.userService.CreateUser(user);
+            const getuser=await this.userService.CreateUser(user);
             if(getuser!=undefined)
             {
                 return getuser;
@@ -21,19 +21,6 @@ export class UserController{
             }
         }
 
-        @Post('/insertadmin')
-        @UseGuards(AdminGuard)
-        async CreateAdmin(@Body() user:User): Promise<User|any>{
-            const getuser= this.userService.CreateAdmin(user);
-            if(getuser!=undefined)
-            {
-                return getuser;
-            }
-            else
-            {
-                return "User already exists.";
-            }
-        }
 
         @Get('/alluser')
         @UseGuards(AdminGuard)
@@ -43,12 +30,12 @@ export class UserController{
 
         @Post('/login')
         async LogIn(@Body() user:User,@Request() req): Promise<User|any>{
-            const getuser= this.userService.LogIn(user);
+            const getuser= await this.userService.LogIn(user);
             if(getuser!=undefined)
             {
-                req.res.cookie('name', (await getuser).name);
-                req.res.cookie('post', (await getuser).post);
-                return getuser;
+                req.res.cookie('name', getuser.name);
+                req.res.cookie('post', getuser.post);
+                return "Loggen In Successfully!";
             }
             else
             {

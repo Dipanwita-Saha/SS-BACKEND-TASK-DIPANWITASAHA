@@ -9,9 +9,9 @@ import { AdminGuard } from 'src/guard/auth.guard';
 export class MovieController{
     constructor(private movieService: MovieService){}
 
-    
+
         @UseGuards(AdminGuard)
-        @Post('/createmovie')
+        @Post('/insertmovie')
         async CreateMovie(@Body() movie:Movie): Promise<Movie>{
             return this.movieService.CreateMovie(movie);
         }
