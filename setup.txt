@@ -1,0 +1,26 @@
+-> Create project in nest js
+npx @nestjs/cli new SS-BACKEND-TASK-DIPANWITASAHA
+
+-> install mongo, cookie, jwt, bcrypt, and passport
+npm install @nestjs/mongoose mongoose cookie-parser bcrypt jsonwebtoken
+npm install @nestjs/passport
+npm install passport-jwt
+npm install @nestjs/jwt
+
+-> install bcrypt for hasing
+npm i bcrypt
+npm i -D @types/bcrypt
+
+-> install express for session
+npm i express-session
+npm i -D @types/express-session
+
+-> install env dependency
+npm install dotenv
+npm i --save @nestjs/config
+
+-> development dependency
+npm install --save-dev @types/bcryptjs @types/passport-jwt
+
+-> install cookie
+npm install cookie-parser
